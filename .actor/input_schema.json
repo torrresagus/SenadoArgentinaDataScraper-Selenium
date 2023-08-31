@@ -8,7 +8,7 @@
             "type": "array",
             "description": "URLs to start with",
             "prefill": [
-                { "url": "https://www.senado.gob.ar/parlamentario/parlamentaria/avanzada" }
+                { "url": "https://www.senado.gob.ar/parlamentario/parlamentaria/" }
             ],
             "editor": "requestListSources"
         },

@@ -38,8 +38,6 @@ async def main():
             # Open the URL in the Selenium WebDriver
             driver.get(url)
             
-            time.sleep(0.85)
-            
             errors = await validate_form_data_selenium(driver, actor_input)
             if errors:
                 Actor.log.info(f'Errores: {errors}')
@@ -181,40 +179,48 @@ async def main():
 async def validate_form_data_selenium(driver, actor_input):
     errors = []
 
-    # Validar el campo 'Autor'
-    autor_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[1]/div[1]/select'))
-    autor_options = [option.get_attribute('value') for option in autor_element.options]
-    if actor_input.get('autor') and actor_input['autor'].upper() not in autor_options:
-        errors.append("El valor para 'autor' no es válido")
+    try:
+        # Validar el campo 'Autor'
+        autor_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[1]/div[1]/select'))
+        autor_options = [option.get_attribute('value') for option in autor_element.options]
+        if actor_input.get('autor') and actor_input['autor'].upper() not in autor_options:
+            errors.append("El valor para 'autor' no es válido")
 
-    # Validar el Campo 'Año'
-    año_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[3]/select'))
-    año_options = [option.get_attribute('value') for option in año_element.options]
-    if actor_input.get('año') and actor_input['año'].upper() not in año_options:
-        errors.append("El valor para 'año' no es válido")
+        # Validar el Campo 'Año'
+        año_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[3]/select'))
+        año_options = [option.get_attribute('value') for option in año_element.options]
+        if actor_input.get('año') and actor_input['año'].upper() not in año_options:
+            errors.append("El valor para 'año' no es válido")
 
-    # Validar el campo 'Tipo de Documento'
-    tipo_documento_element = Select(driver.find_element(By.XPATH, '//*[@id="busqueda_proyectos_tipoDocumento"]'))
-    tipo_documento_options = [option.get_attribute('value') for option in tipo_documento_element.options]
-    if actor_input.get('tipo_documento') and actor_input['tipo_documento'].upper() not in tipo_documento_options:
-        errors.append("El valor para 'tipoDocumento' no es válido")
+        # Validar el campo 'Tipo de Documento'
+        tipo_documento_element = Select(driver.find_element(By.XPATH, '//*[@id="busqueda_proyectos_tipoDocumento"]'))
+        tipo_documento_options = [option.get_attribute('value') for option in tipo_documento_element.options]
+        if actor_input.get('tipo_documento') and actor_input['tipo_documento'].upper() not in tipo_documento_options:
+            errors.append("El valor para 'tipoDocumento' no es válido")
 
-    # Validar el campo 'Origen del Expediente'
-    origen_expediente_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[1]/select'))
-    origen_expediente_options = [option.get_attribute('value') for option in origen_expediente_element.options]
-    if actor_input.get('origen_expediente') and actor_input['origen_expediente'].upper() not in origen_expediente_options:
-        errors.append("El valor para 'Origen del Expediente' no es válido")
+        # Validar el campo 'Origen del Expediente'
+        origen_expediente_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[1]/select'))
+        origen_expediente_options = [option.get_attribute('value') for option in origen_expediente_element.options]
+        if actor_input.get('origen_expediente') and actor_input['origen_expediente'].upper() not in origen_expediente_options:
+            errors.append("El valor para 'Origen del Expediente' no es válido")
 
-    # Validar el campo 'Comisiones'
-    comisiones_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[1]/div[5]/select'))
-    comisiones_options = [option.get_attribute('value') for option in comisiones_element.options]
-    if actor_input.get('comisiones') and actor_input['comisiones'].upper() not in comisiones_options:
-        errors.append("El valor para 'Comisiones' no es válido")
+        # Validar el campo 'Comisiones'
+        comisiones_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[1]/div[5]/select'))
+        comisiones_options = [option.get_attribute('value') for option in comisiones_element.options]
+        if actor_input.get('comisiones') and actor_input['comisiones'].upper() not in comisiones_options:
+            errors.append("El valor para 'Comisiones' no es válido")
 
-    # Validar el campo 'Tipo de Expediente'
-    tipo_expediente_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[4]/select'))
-    tipo_expediente_options = [option.get_attribute('value') for option in tipo_expediente_element.options]
-    if actor_input.get('tipo_expediente') and actor_input['tipo_expediente'].upper() not in tipo_expediente_options:
-        errors.append("El valor para 'Tipo de Expediente' no es válido")
+        # Validar el campo 'Tipo de Expediente'
+        tipo_expediente_element = Select(driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div/div/div[3]/div/div/div/div/div[3]/div[3]/div[3]/div[2]/div/div/form/div[3]/div[4]/select'))
+        tipo_expediente_options = [option.get_attribute('value') for option in tipo_expediente_element.options]
+        if actor_input.get('tipo_expediente') and actor_input['tipo_expediente'].upper() not in tipo_expediente_options:
+            errors.append("El valor para 'Tipo de Expediente' no es válido")
+    except:
+        Actor.log.info(f'Error: No se encontraron los elementos en la url proporcionada, por favor revise que la url sea correcta')
+        await Actor.push_data({
+            "Errores": "El contenido de la pagina inspeccionada no es el esperado, revise URL"
+        })
+
+
 
     return errors
