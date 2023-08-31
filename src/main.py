@@ -38,6 +38,8 @@ async def main():
             # Open the URL in the Selenium WebDriver
             driver.get(url)
             
+            time.sleep(0.85)
+            
             errors = await validate_form_data_selenium(driver, actor_input)
             if errors:
                 Actor.log.info(f'Errores: {errors}')
